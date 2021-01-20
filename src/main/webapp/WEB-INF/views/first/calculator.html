@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+</head>
+<body>
+<form method="get" action="/first/calculator1">
+    <input class="form-control mr-1" type="number" placeholder="Number" name="number1">
+    <select class="form-select" aria-label="Default select example" name="operation">
+        <option selected>Select operation</option>
+        <option value="1">multiplication</option>
+        <option value="2">addition</option>
+        <option value="3">subtraction</option>
+        <option value="4">division</option>
+    </select>
+    <input class="form-control mr-1" type="number" placeholder="Number" name="number2">
+    <button class="btn btn-success" type="submit">
+        <span class="fa fa-sign-in"></span>
+    </button>
+</form>
+<p th:text="${result}"></p>
+The result is: <p th:text="${result}"></p>
+</body>
+</html>
