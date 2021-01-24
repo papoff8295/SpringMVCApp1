@@ -5,8 +5,14 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
+import javax.persistence.*;
+@Entity
+@Table(name = "person")
 public class Person {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
     private int id;
 
     @NotEmpty(message = "Name should not empty!")
