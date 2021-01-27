@@ -1,11 +1,15 @@
 package ru.popov.springcourse.models;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "person")
 public class Person {
@@ -25,6 +29,33 @@ public class Person {
     @NotEmpty(message = "Email should be empty!")
     @Email(message = "Email should be valid")
     private String email;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+    joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
+    private List<Role> roles;
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    @NotEmpty
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Size(min = 5, message = "Password should be between 2 char")
+    private String password;
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 
     public void setAge(int age) {
         this.age = age;
@@ -58,12 +89,15 @@ public class Person {
         return name;
     }
 
-    public Person(int id, String name, int age, String email) {
+    public Person(int id, String name, int age, String email, String password, List<Role> roles) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.email = email;
+        this.password = password;
+        this.roles = roles;
     }
 
-    public Person() {}
+    public Person() {
+    }
 }

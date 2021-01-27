@@ -3,21 +3,29 @@ package ru.popov.springcourse.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import ru.popov.springcourse.models.Person;
+import ru.popov.springcourse.models.Role;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class PersonDAO {
     private final JdbcTemplate jdbcTemplate;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public PersonDAO(JdbcTemplate jdbcTemplate) {
+    public PersonDAO(JdbcTemplate jdbcTemplate, BCryptPasswordEncoder passwordEncoder) {
         this.jdbcTemplate = jdbcTemplate;
+        this.passwordEncoder = passwordEncoder;
+    }
+    public Person register(Person person) {
+        List<Role> userRole = jdbcTemplate.query("SELECT * FROM Roles WHERE name=?", new Object[]{"ROLE_USER"}, new BeanPropertyRowMapper<>(Role.class));
+        person.setPassword(passwordEncoder.encode(person.getPassword()));
+        person.setRoles(userRole);
+        return person;
+
     }
 
     public List<Person> index() {
