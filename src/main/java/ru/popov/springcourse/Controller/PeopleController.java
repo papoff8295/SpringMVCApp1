@@ -32,8 +32,6 @@ public class PeopleController {
     @Autowired
     public PeopleController(PersonDAO personDAO, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
         this.personDAO = personDAO;
-        this.authenticationManager = authenticationManager;
-        this.jwtTokenProvider = jwtTokenProvider;
     }
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthRequestDto authRequestDto) {
@@ -57,17 +55,17 @@ public class PeopleController {
     @GetMapping
     public String index(Model model) {
         model.addAttribute("people", personDAO.index());
-        return "/WEB-INF/views/people/index.html";
+        return "index";
     }
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("person", personDAO.show(id));
-        return "/WEB-INF/views/people/show.html";
+        return "show";
     }
 
     @GetMapping("/new")
     public String newPerson(@ModelAttribute("person") Person person) {
-        return "/WEB-INF/views/people/new.html";
+        return "new";
     }
 
     @PostMapping
@@ -81,7 +79,7 @@ public class PeopleController {
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") int id, Model model) {
         model.addAttribute("person", personDAO.show(id));
-        return "/WEB-INF/views/people/edit.html";
+        return "edit";
     }
 
     @PatchMapping("/{id}")
