@@ -12,6 +12,30 @@ public class Role {
     @Column(columnDefinition = "serial")
     private int id;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPerson(List<Person> person) {
+        this.person = person;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Person> getPerson() {
+        return person;
+    }
+
     @NotEmpty
     private String name;
 

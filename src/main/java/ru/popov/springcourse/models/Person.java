@@ -30,6 +30,11 @@ public class Person {
     @Email(message = "Email should be valid")
     private String email;
 
+    @NotEmpty
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Size(min = 5, message = "Password should be between 2 char")
+    private String password;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
     joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")})
@@ -43,11 +48,6 @@ public class Person {
     public List<Role> getRoles() {
         return roles;
     }
-
-    @NotEmpty
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Size(min = 5, message = "Password should be between 2 char")
-    private String password;
 
     public void setPassword(String password) {
         this.password = password;
