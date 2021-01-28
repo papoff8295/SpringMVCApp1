@@ -1,13 +1,11 @@
 package ru.popov.springcourse.models;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -31,7 +29,6 @@ public class Person {
     private String email;
 
     @NotEmpty
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Size(min = 5, message = "Password should be between 2 char")
     private String password;
 
