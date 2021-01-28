@@ -25,13 +25,15 @@ import java.util.Map;
 @RequestMapping("/people")
 public class PeopleController {
 
-    private PersonDAO personDAO;
-    private AuthenticationManager authenticationManager;
-    private JwtTokenProvider jwtTokenProvider;
+    private final PersonDAO personDAO;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public PeopleController(PersonDAO personDAO, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
+    public PeopleController(PersonDAO personDAO, AuthenticationManager authenticationManager1, JwtTokenProvider jwtTokenProvider1) {
         this.personDAO = personDAO;
+        this.authenticationManager = authenticationManager1;
+        this.jwtTokenProvider = jwtTokenProvider1;
     }
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthRequestDto authRequestDto) {

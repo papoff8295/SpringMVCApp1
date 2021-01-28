@@ -12,10 +12,10 @@ import ru.popov.springcourse.security.jwt.JwtPersonFactory;
 
 @Service
 public class JwtPersonDetailsService implements UserDetailsService {
-    private final PersonDAO personDAO;
+    private  PersonDAO personDAO;
 
     @Autowired
-    public JwtPersonDetailsService(PersonDAO personDAO) {
+    public void setPersonDAO(PersonDAO personDAO) {
         this.personDAO = personDAO;
     }
 
@@ -26,6 +26,6 @@ public class JwtPersonDetailsService implements UserDetailsService {
             throw  new UsernameNotFoundException("User not found");
         }
         JwtPerson jwtPerson = JwtPersonFactory.create(person);
-        return null;
+        return jwtPerson;
     }
 }

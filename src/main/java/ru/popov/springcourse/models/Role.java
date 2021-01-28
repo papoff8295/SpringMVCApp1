@@ -12,6 +12,12 @@ public class Role {
     @Column(columnDefinition = "serial")
     private int id;
 
+    @NotEmpty
+    private String name;
+
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private List<Person> persons;
+
     public void setId(int id) {
         this.id = id;
     }
@@ -20,8 +26,8 @@ public class Role {
         this.name = name;
     }
 
-    public void setPerson(List<Person> person) {
-        this.person = person;
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
     }
 
     public int getId() {
@@ -32,13 +38,9 @@ public class Role {
         return name;
     }
 
-    public List<Person> getPerson() {
-        return person;
+    public List<Person> getPersons() {
+        return persons;
     }
 
-    @NotEmpty
-    private String name;
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    private List<Person> person;
 }

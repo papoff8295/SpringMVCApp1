@@ -7,21 +7,27 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import ru.popov.springcourse.models.Person;
 import ru.popov.springcourse.models.Role;
 
 import java.util.List;
+import java.util.Set;
 
-@Service
+@Component
 public class PersonDAO {
-    private final JdbcTemplate jdbcTemplate;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private JdbcTemplate jdbcTemplate;
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public PersonDAO(JdbcTemplate jdbcTemplate, BCryptPasswordEncoder passwordEncoder) {
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+    @Autowired
+    public void setPasswordEncoder(BCryptPasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
+
     public Person register(Person person) {
         List<Role> userRole = jdbcTemplate.query("SELECT * FROM Roles WHERE name=?", new Object[]{"ROLE_USER"}, new BeanPropertyRowMapper<>(Role.class));
         person.setPassword(passwordEncoder.encode(person.getPassword()));
@@ -58,4 +64,6 @@ public class PersonDAO {
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM Person WHERE id=?", id);
     }
+
+
 }
