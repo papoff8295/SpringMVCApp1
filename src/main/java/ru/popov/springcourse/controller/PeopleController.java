@@ -1,4 +1,4 @@
-package ru.popov.springcourse.Controller;
+package ru.popov.springcourse.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
