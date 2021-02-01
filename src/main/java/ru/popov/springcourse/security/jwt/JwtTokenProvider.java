@@ -70,6 +70,7 @@ public class JwtTokenProvider {
 
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(getPersonName(token));
+        userDetails.isEnabled();
         return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getAuthorities());
     }
 

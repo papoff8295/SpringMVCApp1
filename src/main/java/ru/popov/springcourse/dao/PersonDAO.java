@@ -1,7 +1,6 @@
 package ru.popov.springcourse.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.popov.springcourse.models.Person;
@@ -43,7 +42,7 @@ public class PersonDAO {
 
     public Person findByPersonName(String personName) {
 
-        return personRepository.findByPersonName(personName);
+        return personRepository.findByName(personName);
     }
 
     public Person show(int id) {
