@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtTokenProvider jwtTokenProvider;
-    private static final String ADMIN_ENDPOINT = "/people/admin/**";
+    private static final String ADMIN_ENDPOINT = "/admin/**";
     private static final String LOGIN_ENDPOINT = "/people/login";
 
     @Autowired

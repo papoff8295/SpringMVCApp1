@@ -1,5 +1,6 @@
 package ru.popov.springcourse.security.jwt;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,12 +15,9 @@ public class JwtPerson implements UserDetails {
     private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
 
+    @JsonIgnore
     public int getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getAge() {
@@ -41,36 +39,36 @@ public class JwtPerson implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return name;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
