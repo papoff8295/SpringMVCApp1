@@ -12,7 +12,7 @@ import ru.popov.springcourse.dto.PersonDTO;
 import ru.popov.springcourse.models.Person;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping(value = "/admin/")
 public class AdminController {
     private final PersonDAO personDAO;
 
@@ -21,7 +21,7 @@ public class AdminController {
         this.personDAO = personDAO;
     }
 
-    @GetMapping("user/{id}")
+    @GetMapping(value = "people/{id}")
     public ResponseEntity<PersonDTO> getPersonById(@PathVariable(name = "id") int id) {
         Person person = personDAO.show(id);
         if (person == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
