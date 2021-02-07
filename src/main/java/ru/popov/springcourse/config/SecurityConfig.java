@@ -19,6 +19,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtTokenProvider jwtTokenProvider;
     private static final String ADMIN_ENDPOINT = "/admin/people/**";
     private static final String LOGIN_ENDPOINT = "/people/login";
+    private static final String PEOPLE_ENDPOINT = "/people/**";
+
 
     @Autowired
     public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
@@ -36,12 +38,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http
             .httpBasic().disable()
             .csrf().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
+            //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .authorizeRequests()
             .antMatchers(LOGIN_ENDPOINT).permitAll()
             .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
+            .antMatchers(PEOPLE_ENDPOINT).hasRole("USER")
+            .antMatchers("/login*").permitAll()
             .anyRequest().authenticated()
+            .and()
+            .formLogin()
+            .loginPage("/login.jsp")
+            .loginProcessingUrl("/people/login").failureUrl("/login?error")
             .and()
             .apply(new JwtConfigurer(jwtTokenProvider));
     }
