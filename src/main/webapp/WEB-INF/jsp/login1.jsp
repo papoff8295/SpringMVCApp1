@@ -4,9 +4,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
-
+<%--<jsp:include page="fragments/headTag.jsp"/>--%>
 <body>
-
+<%--<jsp:include page="fragments/bodyHeader.jsp"/>--%>
 
 <div class="jumbotron py-0">
     <div class="container">
@@ -18,23 +18,12 @@
         </c:if>
         <sec:authorize access="isAnonymous()">
             <div class="pt-4">
-                <a class="btn btn-lg btn-info" href="profile/register"><spring:message text="Registration"/> &raquo;</a>
+                <a class="btn btn-lg btn-info" href="register"><spring:message text="Register"/> &raquo;</a>
             </div>
         </sec:authorize>
+    </div>
+</div>
 
-<script type="text/javascript">
-    <c:if test="${not empty param.username}">
-    setCredentials("${param.username}", "");
-    </c:if>
-
-    function login(username, password) {
-        setCredentials(username, password);
-        $("#login_form").submit();
-    }
-    function setCredentials(username, password) {
-        $('input[name="username"]').val(username);
-        $('input[name="password"]').val(password);
-    }
-</script>
+<%--<jsp:include page="fragments/footer.jsp"/>--%>
 </body>
 </html>

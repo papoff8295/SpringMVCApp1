@@ -81,7 +81,7 @@ public class PeopleController {
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") int id, Model model) {
         model.addAttribute("person", personDAO.show(id));
-        return "edit";
+        return "people/edit";
     }
 
     @PatchMapping("/{id}")

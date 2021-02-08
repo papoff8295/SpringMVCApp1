@@ -4,5 +4,10 @@
       "name": "jwt.token.secret",
       "type": "java.lang.String",
       "description": "Description for jwt.token.secret."
+    },
+    {
+      "name": "resolver.setPrefix",
+      "type": "java.lang.String",
+      "description": "Description for resolver.setPrefix."
     }
   ] }
