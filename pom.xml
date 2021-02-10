@@ -18,6 +18,9 @@
     <java.version>1.8</java.version>
     <webjars-bootstrap.version>4.5.3</webjars-bootstrap.version>
     <webjars-jquery.version>3.5.1</webjars-jquery.version>
+    <webjars-datetimepicker.version>2.5.20-1</webjars-datetimepicker.version>
+    <webjars-noty.version>3.1.4</webjars-noty.version>
+    <webjars-datatables.version>1.10.21</webjars-datatables.version>
   </properties>
   <dependencies>
 
@@ -82,6 +85,27 @@
           <artifactId>popper.js</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>datatables</artifactId>
+      <version>${webjars-datatables.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.webjars</groupId>
+          <artifactId>jquery</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>datetimepicker</artifactId>
+      <version>${webjars-datetimepicker.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.webjars.bower</groupId>
+      <artifactId>noty</artifactId>
+      <version>${webjars-noty.version}</version>
     </dependency>
 
         <dependency>

@@ -2,12 +2,10 @@ package ru.popov.springcourse.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.popov.springcourse.dao.PersonDAO;
 import ru.popov.springcourse.dto.RegisterPersonDTO;
@@ -28,7 +26,7 @@ public class RootController {
     @GetMapping("/login")
     public String login() {
 
-        return "login1";
+        return "login";
     }
 
     @GetMapping("/register")

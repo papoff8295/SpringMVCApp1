@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .loginPage("/login").permitAll()
             //.loginProcessingUrl("/people/login")
             .failureUrl("/login?error")
-            .defaultSuccessUrl("/index.html")
+            .defaultSuccessUrl("/index")
             .and()
             .apply(new JwtConfigurer(jwtTokenProvider));
     }

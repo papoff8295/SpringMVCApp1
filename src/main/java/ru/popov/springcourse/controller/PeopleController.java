@@ -48,6 +48,7 @@ public class PeopleController {
             Map<Object, Object> response = new HashMap<>();
             response.put("personName", personName);
             response.put("token", token);
+            response.put("id", person.getId());
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid data");
