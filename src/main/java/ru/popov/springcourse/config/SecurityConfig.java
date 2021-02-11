@@ -18,7 +18,8 @@ import javax.sql.DataSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtTokenProvider jwtTokenProvider;
     private static final String ADMIN_ENDPOINT = "/admin/people/**";
-    private static final String LOGIN_ENDPOINT = "/people/login";
+    private static final String LOGIN_ENDPOINT = "/login";
+    private static final String REGISTER_ENDPOINT = "/register";
     private static final String PEOPLE_ENDPOINT = "/people/**";
 
 
@@ -36,22 +37,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     http
-            //.httpBasic().disable()
+           //.httpBasic().disable()
             .csrf().disable()
             //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            //.and()
             .authorizeRequests()
-            .antMatchers(LOGIN_ENDPOINT).permitAll()
+            .antMatchers(REGISTER_ENDPOINT).not().fullyAuthenticated()
+            //.antMatchers(LOGIN_ENDPOINT).anonymous()
             .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
             .antMatchers(PEOPLE_ENDPOINT).hasRole("USER")
-            .antMatchers("/register").anonymous()
             .anyRequest().authenticated()
             .and()
             .formLogin()
             .loginPage("/login").permitAll()
             //.loginProcessingUrl("/people/login")
-            .failureUrl("/login?error")
-            .defaultSuccessUrl("/index")
+            //.failureUrl("/login?error")
+            .defaultSuccessUrl("/").permitAll()
+            .and()
+            .logout()
+            .permitAll()
+            .logoutSuccessUrl("/")
             .and()
             .apply(new JwtConfigurer(jwtTokenProvider));
     }
+
 }

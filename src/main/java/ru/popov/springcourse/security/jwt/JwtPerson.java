@@ -8,14 +8,14 @@ import java.util.Collection;
 
 public class JwtPerson implements UserDetails {
 
-    private final int id;
-    private final String name;
-    private final int age;
-    private final String email;
-    private final String password;
-    private final Collection<? extends GrantedAuthority> authorities;
+    private int id;
+    private String name;
+    private int age;
+    private String email;
+    private String password;
+    private Collection<? extends GrantedAuthority> authorities;
 
-    @JsonIgnore
+
     public int getId() {
         return id;
     }
@@ -35,6 +35,9 @@ public class JwtPerson implements UserDetails {
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+    }
+
+    public JwtPerson() {
     }
 
     @Override

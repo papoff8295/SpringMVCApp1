@@ -2,6 +2,7 @@ package ru.popov.springcourse.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -14,6 +15,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.popov.springcourse.dao.PersonDAO;
 import ru.popov.springcourse.dto.AuthRequestDto;
+import ru.popov.springcourse.dto.PersonDTO;
+import ru.popov.springcourse.dto.RegisterPersonDTO;
 import ru.popov.springcourse.models.Person;
 import ru.popov.springcourse.security.jwt.JwtTokenProvider;
 
@@ -35,27 +38,9 @@ public class PeopleController {
         this.authenticationManager = authenticationManager1;
         this.jwtTokenProvider = jwtTokenProvider1;
     }
-    @PostMapping("/login")
-    public ResponseEntity login(@RequestBody AuthRequestDto authRequestDto) {
-        try {
-            String personName = authRequestDto.getPersonName();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(personName, authRequestDto.getPassword()));
-            Person person = personDAO.findByPersonName(personName);
-            if (person == null) {
-                throw new UsernameNotFoundException("User not found");
-            }
-            String token = jwtTokenProvider.createToken(personName, person.getRoles());
-            Map<Object, Object> response = new HashMap<>();
-            response.put("personName", personName);
-            response.put("token", token);
-            response.put("id", person.getId());
-            return ResponseEntity.ok(response);
-        } catch (AuthenticationException e) {
-            throw new BadCredentialsException("Invalid data");
-        }
-    }
 
-    @GetMapping
+
+    @GetMapping("/index")
     public String index(Model model) {
         model.addAttribute("people", personDAO.index());
         return "index";
@@ -78,6 +63,7 @@ public class PeopleController {
         personDAO.save(person);
         return "redirect:/people";
     }
+
 
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") int id, Model model) {

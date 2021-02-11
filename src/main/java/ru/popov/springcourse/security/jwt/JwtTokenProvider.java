@@ -34,7 +34,9 @@ public class JwtTokenProvider {
         return new BCryptPasswordEncoder();
     }
 
-
+    public JwtPersonDetailsService getUserDetailsService() {
+        return userDetailsService;
+    }
 
     private JwtPersonDetailsService userDetailsService;
 

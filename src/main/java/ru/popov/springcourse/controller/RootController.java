@@ -29,22 +29,28 @@ public class RootController {
         return "login";
     }
 
-    @GetMapping("/register")
-    public String register(ModelMap model) {
-        model.addAttribute("personDTO", new RegisterPersonDTO());
-        model.addAttribute("register", true);
-        return "profile";
-    }
+//    @GetMapping("/index")
+//    public String home()
+//    {
+//        return "index";
+//    }
 
-    @PostMapping("/register")
-    public String saveRegister(@Valid RegisterPersonDTO personDTO, BindingResult result, SessionStatus status, ModelMap model) {
-        if (result.hasErrors()) {
-            model.addAttribute("register", true);
-            return "profile";
-        }
-        Person person = personDTO.toPerson();
-        personDAO.register(person);
-        status.setComplete();
-        return "redirect:index";
-    }
+//    @GetMapping("/register")
+//    public String register(ModelMap model) {
+//        model.addAttribute("personDTO", new RegisterPersonDTO());
+//        model.addAttribute("register", true);
+//        return "profile";
+//    }
+//
+//    @PostMapping("/register")
+//    public String saveRegister(@Valid RegisterPersonDTO personDTO, BindingResult result, SessionStatus status, ModelMap model) {
+//        if (result.hasErrors()) {
+//            model.addAttribute("register", true);
+//            return "profile";
+//        }
+//        Person person = personDTO.toPerson();
+//        personDAO.register(person);
+//        status.setComplete();
+//        return "redirect:index";
+//    }
 }
