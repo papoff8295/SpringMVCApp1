@@ -8,15 +8,16 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import ru.popov.springcourse.dao.PersonDAO;
 import ru.popov.springcourse.dto.AuthRequestDto;
+import ru.popov.springcourse.dto.RegisterPersonDTO;
 import ru.popov.springcourse.models.Person;
 import ru.popov.springcourse.security.jwt.JwtTokenProvider;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,8 +36,34 @@ public class LoginController {
         this.jwtTokenProvider = jwtTokenProvider1;
     }
 
+//    @PostMapping()
+//    public ResponseEntity login(@RequestBody AuthRequestDto authRequestDto) {
+//        try {
+//            String personName = authRequestDto.getPersonName();
+//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(personName, authRequestDto.getPassword()));
+//            Person person = personDAO.findByPersonName(personName);
+//            if (person == null) {
+//                throw new UsernameNotFoundException("User not found");
+//            }
+//            String token = jwtTokenProvider.createToken(personName, person.getRoles());
+//            Map<Object, Object> response = new HashMap<>();
+//            response.put("personName", personName);
+//            response.put("token", token);
+//            //response.put("id", person.getId());
+//            return ResponseEntity.ok(response);
+//        } catch (AuthenticationException e) {
+//            throw new BadCredentialsException("Invalid data");
+//        }
+//    }
+
+    @GetMapping
+    public String login(Model model) {
+        model.addAttribute("userForm", new AuthRequestDto());
+        return "login";
+    }
     @PostMapping()
-    public ResponseEntity login(@RequestBody AuthRequestDto authRequestDto) {
+    public String login(@PathVariable("username") String username, @PathVariable("password") String password) {
+        if (bindingResult.hasErrors()) return "login";
         try {
             String personName = authRequestDto.getPersonName();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(personName, authRequestDto.getPassword()));
@@ -45,11 +72,13 @@ public class LoginController {
                 throw new UsernameNotFoundException("User not found");
             }
             String token = jwtTokenProvider.createToken(personName, person.getRoles());
-            Map<Object, Object> response = new HashMap<>();
-            response.put("personName", personName);
-            response.put("token", token);
+//            Map<Object, Object> response = new HashMap<>();
+//            response.put("personName", personName);
+//            response.put("token", token);
             //response.put("id", person.getId());
-            return ResponseEntity.ok(response);
+            model.addAttribute("name", personName);
+            model.addAttribute("token", token);
+            return "redirect:/";
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid data");
         }

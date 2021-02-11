@@ -23,11 +23,11 @@ public class RootController {
         this.personDAO = personDAO;
     }
 
-    @GetMapping("/login")
-    public String login() {
-
-        return "login";
-    }
+//    @GetMapping("/login")
+//    public String login() {
+//
+//        return "login";
+//    }
 
 //    @GetMapping("/index")
 //    public String home()

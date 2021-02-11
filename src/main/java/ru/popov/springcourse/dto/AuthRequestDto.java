@@ -4,6 +4,9 @@ public class AuthRequestDto {
     private String personName;
     private String password;
 
+    public AuthRequestDto() {
+    }
+
     public void setPersonName(String personName) {
         this.personName = personName;
     }
