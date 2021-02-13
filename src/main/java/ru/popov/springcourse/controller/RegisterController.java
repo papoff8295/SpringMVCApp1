@@ -43,6 +43,7 @@ public class RegisterController {
 
         return "registration";
     }
+
     @PostMapping
     public String register(@ModelAttribute("userForm") @Valid RegisterPersonDTO registerPersonDTO,
                            BindingResult bindingResult, Model model) {
@@ -52,9 +53,8 @@ public class RegisterController {
         person.setPassword(registerPersonDTO.getPassword());
         person.setEmail(registerPersonDTO.getEmail());
         person.setAge(registerPersonDTO.getAge());
-        Person registerPerson = personDAO.register(person);
         //PersonDTO result = PersonDTO.fromPerson(registerPerson);
-        if (registerPerson == null) {
+        if (!personDAO.register(person)) {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }

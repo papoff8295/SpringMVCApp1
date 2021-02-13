@@ -63,10 +63,9 @@ public class LoginController {
     }
     @PostMapping()
     public String login(@PathVariable("username") String username, @PathVariable("password") String password) {
-        if (bindingResult.hasErrors()) return "login";
         try {
-            String personName = authRequestDto.getPersonName();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(personName, authRequestDto.getPassword()));
+            String personName = username;
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(personName, password));
             Person person = personDAO.findByPersonName(personName);
             if (person == null) {
                 throw new UsernameNotFoundException("User not found");
@@ -76,8 +75,8 @@ public class LoginController {
 //            response.put("personName", personName);
 //            response.put("token", token);
             //response.put("id", person.getId());
-            model.addAttribute("name", personName);
-            model.addAttribute("token", token);
+            //model.addAttribute("name", personName);
+           //model.addAttribute("token", token);
             return "redirect:/";
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid data");

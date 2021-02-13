@@ -20,6 +20,14 @@
                 ${usernameError}
         </div>
         <div>
+            <form:input type="number" path="age" placeholder="Age"></form:input>
+            <form:errors path="age"></form:errors>
+        </div>
+        <div>
+            <form:input type="text" path="email" placeholder="Email"></form:input>
+            <form:errors path="email"></form:errors>
+        </div>
+        <div>
             <form:input type="password" path="password" placeholder="Password"></form:input>
         </div>
 <%--        <div>--%>

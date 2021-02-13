@@ -26,13 +26,16 @@ public class PersonDAO {
     }
 
 
-    public Person register(Person person) {
+    public boolean register(Person person) {
+        Person checkPerson = personRepository.findByName(person.getName());
+        if (checkPerson != null) return false;
        Role roleUser = roleRepository.findByName("ROLE_USER");
        List<Role> userRoles = new ArrayList<>();
        userRoles.add(roleUser);
        person.setPassword(passwordEncoder.encode(person.getPassword()));
        person.setRoles(userRoles);
-        return personRepository.save(person);
+       personRepository.save(person);
+        return true;
 
     }
 
