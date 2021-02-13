@@ -1,11 +1,12 @@
 package ru.popov.springcourse.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import org.springframework.stereotype.Component;
 import ru.popov.springcourse.models.Person;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Email;
 
 
 @Component

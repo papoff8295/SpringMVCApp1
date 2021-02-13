@@ -1,7 +1,5 @@
 package ru.popov.springcourse.controller;
 
-
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
@@ -11,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.popov.springcourse.dao.PersonDAO;
 import ru.popov.springcourse.models.Person;
 import ru.popov.springcourse.security.jwt.JwtTokenProvider;
+
+import javax.validation.Valid;
 
 
 @Controller

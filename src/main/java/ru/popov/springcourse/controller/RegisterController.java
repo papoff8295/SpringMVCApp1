@@ -1,6 +1,5 @@
 package ru.popov.springcourse.controller;
 
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
@@ -16,10 +15,11 @@ import ru.popov.springcourse.dto.RegisterPersonDTO;
 import ru.popov.springcourse.models.Person;
 import ru.popov.springcourse.security.jwt.JwtTokenProvider;
 
+import javax.validation.Valid;
+
 
 @Controller
 @RequestMapping("/register")
-@Validated
 public class RegisterController {
     private final PersonDAO personDAO;
     private final AuthenticationManager authenticationManager;

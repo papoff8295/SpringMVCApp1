@@ -29,6 +29,7 @@
         </div>
         <div>
             <form:input type="password" path="password" placeholder="Password"></form:input>
+            <form:errors path="password"></form:errors>
         </div>
 <%--        <div>--%>
 <%--            <form:input type="password" path="passwordConfirm"--%>
