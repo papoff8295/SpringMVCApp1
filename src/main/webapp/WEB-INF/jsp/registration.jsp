@@ -14,8 +14,7 @@
     <form:form method="POST" modelAttribute="userForm">
         <h2>Регистрация</h2>
         <div>
-            <form:input type="text" path="name" placeholder="Username"
-                        autofocus="true"></form:input>
+            <form:input type="text" path="name" placeholder="Username" autofocus="true"></form:input>
             <form:errors path="name"></form:errors>
                 ${usernameError}
         </div>
