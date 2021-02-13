@@ -20,6 +20,7 @@
         </div>
         <div>
             <form:input type="number" path="age" placeholder="Age"></form:input>
+<%--            <div style="color:red" c:if=${fields.hasErrors('name')} th:errors="*{name}">Name error</div>--%>
             <form:errors path="age"></form:errors>
         </div>
         <div>
