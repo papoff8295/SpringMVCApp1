@@ -18,17 +18,18 @@
         <th>Password</th>
         <th>Roles</th>
         </thead>
-        <c:forEach items="${allUsers}" var="user">
+        <c:forEach items="${allUsers}" var="people">
             <tr>
-                <td>${user.id}</td>
-                <td>${user.username}</td>
-                <td>${user.password}</td>
+                <td>${people.id}</td>
+                <td>${people.name}</td>
+                <td>${people.age}</td>
+                <td>${people.email}</td>
                 <td>
-                    <c:forEach items="${user.roles}" var="role">${role.name}; </c:forEach>
+                    <c:forEach items="${people.roles}" var="role">${role.name}; </c:forEach>
                 </td>
                 <td>
-                    <form action="${pageContext.request.contextPath}/admin" method="post">
-                        <input type="hidden" name="userId" value="${user.id}"/>
+                    <form action="${pageContext.request.contextPath}/admin" method="delete">
+                        <input type="hidden" name="userId" value="${people.id}"/>
                         <input type="hidden" name="action" value="delete"/>
                         <button type="submit">Delete</button>
                     </form>

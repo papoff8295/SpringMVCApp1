@@ -31,7 +31,6 @@
 <%--        <div>--%>
 <%--            <form:input type="text" path="personName" placeholder="Username" autofocus="true"></form:input>--%>
 <%--            <form:errors path="personName"></form:errors>--%>
-<%--                ${usernameError}--%>
 <%--        </div>--%>
 <%--        <div>--%>
 <%--            <form:input type="password" path="password" placeholder="Password"></form:input>--%>
@@ -43,6 +42,7 @@
 <%--        &lt;%&ndash;                ${passwordError}&ndash;%&gt;--%>
 <%--        &lt;%&ndash;        </div>&ndash;%&gt;--%>
 <%--        <button type="submit">Зарегистрироваться</button>--%>
+
 <%--    </form:form>--%>
 <%--    <a href="/">Главная</a>--%>
 <%--</div>--%>
