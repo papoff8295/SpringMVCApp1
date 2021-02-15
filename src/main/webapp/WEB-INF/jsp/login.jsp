@@ -10,9 +10,9 @@
 </head>
 
 <body>
-<sec:authorize access="isAuthenticated()">
-    <% response.sendRedirect("/"); %>
-</sec:authorize>
+<%--<sec:authorize access="isAuthenticated()">--%>
+<%--    <% response.sendRedirect("/"); %>--%>
+<%--</sec:authorize>--%>
 <div>
     <form method="POST" action="/login">
         <h2>Вход в систему</h2>

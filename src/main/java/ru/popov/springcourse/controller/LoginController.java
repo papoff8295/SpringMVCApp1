@@ -7,11 +7,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.popov.springcourse.dao.PersonDAO;
-import ru.popov.springcourse.dto.AuthRequestDto;
 import ru.popov.springcourse.models.Person;
 import ru.popov.springcourse.security.jwt.JwtTokenProvider;
 
@@ -50,11 +47,16 @@ public class LoginController {
 //        }
 //    }
 
-    @GetMapping
-    public String login(Model model) {
-        model.addAttribute("userForm", new AuthRequestDto());
-        return "login";
-    }
+//    @GetMapping
+//    public String login(Model model) {
+//        model.addAttribute("userForm", new AuthRequestDto());
+//        return "login";
+//    }
+
+//    @GetMapping
+//    public String login() {
+//        return "login";
+//    }
 
 //    @PostMapping
 //    public String login(@ModelAttribute("userForm") AuthRequestDto authRequestDto, BindingResult bindingResult, Model model) {
@@ -79,10 +81,9 @@ public class LoginController {
 //    }
 
     @PostMapping
-    public String login(@PathVariable("username") String username, PathVariable("password") String password) {
+    public String login(@RequestParam("username") String username, @RequestParam("password") String password) {
         try {
-            String username = authRequestDto.getPersonName();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, authRequestDto.getPassword()));
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             Person person = personDAO.findByPersonName(username);
             if (person == null) {
                 throw new UsernameNotFoundException("User not found");
@@ -92,8 +93,8 @@ public class LoginController {
 //            response.put("personName", personName);
 //            response.put("token", token);
             //response.put("id", person.getId());
-            model.addAttribute("name", username);
-            model.addAttribute("token", token);
+            //model.addAttribute("name", username);
+            //model.addAttribute("token", token);
             return "redirect:/";
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid data");
