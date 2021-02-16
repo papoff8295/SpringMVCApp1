@@ -8,7 +8,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.popov.springcourse.dao.PersonDAO;
 import ru.popov.springcourse.models.Person;
-import ru.popov.springcourse.security.jwt.JwtTokenProvider;
 
 import javax.validation.Valid;
 
@@ -19,13 +18,11 @@ public class PeopleController {
 
     private final PersonDAO personDAO;
     private final AuthenticationManager authenticationManager;
-    private final JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public PeopleController(PersonDAO personDAO, AuthenticationManager authenticationManager1, JwtTokenProvider jwtTokenProvider1) {
+    public PeopleController(PersonDAO personDAO, AuthenticationManager authenticationManager1) {
         this.personDAO = personDAO;
         this.authenticationManager = authenticationManager1;
-        this.jwtTokenProvider = jwtTokenProvider1;
     }
 
 

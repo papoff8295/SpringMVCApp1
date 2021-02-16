@@ -10,9 +10,9 @@
 </head>
 
 <body>
-<%--<sec:authorize access="isAuthenticated()">--%>
-<%--    <% response.sendRedirect("/"); %>--%>
-<%--</sec:authorize>--%>
+<sec:authorize access="isAuthenticated()">
+    <% response.sendRedirect("/"); %>
+</sec:authorize>
 <div>
     <form method="POST" action="/login">
         <h2>Вход в систему</h2>
@@ -21,11 +21,11 @@
                    autofocus="true"/>
             <input name="password" type="password" placeholder="Password"/>
             <button type="submit">Log In</button>
-            <h4><a href="/registration">Зарегистрироваться</a></h4>
+            <h4><a href="/register">Зарегистрироваться</a></h4>
         </div>
     </form>
 </div>
-<%--<div>--%>
+<%--&lt;%&ndash;<div>&ndash;%&gt;--%>
 <%--    <form:form method="POST" modelAttribute="userForm">--%>
 <%--        <h2>Регистрация</h2>--%>
 <%--        <div>--%>
@@ -41,10 +41,11 @@
 <%--        &lt;%&ndash;            <form:errors path="password"></form:errors>&ndash;%&gt;--%>
 <%--        &lt;%&ndash;                ${passwordError}&ndash;%&gt;--%>
 <%--        &lt;%&ndash;        </div>&ndash;%&gt;--%>
-<%--        <button type="submit">Зарегистрироваться</button>--%>
+<%--        <button type="submit">Login</button>--%>
 
 <%--    </form:form>--%>
 <%--    <a href="/">Главная</a>--%>
+<%--    <h4><a href="/register">Зарегистрироваться</a></h4>--%>
 <%--</div>--%>
 </body>
 </html>

@@ -1,6 +1,9 @@
 package ru.popov.springcourse.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.popov.springcourse.models.Person;
@@ -12,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PersonDAO {
+public class PersonDAO implements UserDetailsService {
 
     private final PersonRepository personRepository;
     private final RoleRepository roleRepository;
@@ -43,11 +46,6 @@ public class PersonDAO {
         return personRepository.findAll();
     }
 
-    public Person findByPersonName(String personName) {
-
-        return personRepository.findByName(personName);
-    }
-
     public Person show(int id) {
 
         return personRepository.findById(id).orElse(null);
@@ -71,4 +69,8 @@ public class PersonDAO {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return personRepository.findByName(s);
+    }
 }
