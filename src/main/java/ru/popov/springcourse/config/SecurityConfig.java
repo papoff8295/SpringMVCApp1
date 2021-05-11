@@ -4,13 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import ru.popov.springcourse.dao.PersonDAO;
-import ru.popov.springcourse.dto.PersonDTO;
 
 
 @Configuration
@@ -39,31 +36,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Autowired
-    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(personDAO).passwordEncoder(bCryptPasswordEncoder());
-    }
+//    @Autowired
+//    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(personDAO).passwordEncoder(bCryptPasswordEncoder());
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     http
-           //.httpBasic().disable()
+//           .httpBasic().disable()
             .csrf().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-            .and()
+//            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+//            .and()
             .authorizeRequests()
             .antMatchers(REGISTER_ENDPOINT).not().fullyAuthenticated()
             //.antMatchers(LOGIN_ENDPOINT).anonymous()
             .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
             .antMatchers(PEOPLE_ENDPOINT).hasRole("USER")
-            .antMatchers("/", "resources/**").permitAll()
+            .antMatchers("/", "/resources/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin()
             .loginPage("/login").permitAll()
             //.loginProcessingUrl("/login")
             //.failureUrl("/login?error")
-            .defaultSuccessUrl("/").permitAll()
+            .defaultSuccessUrl("/")
             .and()
             .logout()
             .permitAll()
@@ -81,9 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(LOGIN_ENDPOINT).permitAll()
 //                .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
 //                .antMatchers("/").anonymous()
-//                .anyRequest().authenticated()
-//                .and()
-//                .apply(new JwtConfigurer(jwtTokenProvider));
+//                .anyRequest().authenticated();
 //    }
 
 }

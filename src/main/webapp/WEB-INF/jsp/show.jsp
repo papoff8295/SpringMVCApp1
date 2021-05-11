@@ -15,21 +15,24 @@
         <th>ID</th>
         <th>UserName</th>
         <th>Password</th>
+        <th>Age</th>
+        <th>Email</th>
         <th>Roles</th>
         </thead>
-        ${error}
-        <c:forEach items="${allUsers}" var="people">
+
             <tr>
-                <td><a href="/admin/${people.id}">${people.id}</a></td>
-                <td>${people.name}</td>
-                <td>${people.age}</td>
-                <td>${people.email}</td>
+                <td>${person.id}</td>
+                <td>${person.name}</td>
+                <td>${person.password}</td>
+                <td>${person.age}</td>
+                <td>${person.email}</td>
+
                 <td>
-                    <c:forEach items="${people.roles}" var="role">${role.name}; </c:forEach>
+                    <c:forEach items="${person.roles}" var="role">${role.name}; </c:forEach>
                 </td>
                 <td>
                     <form method="POST" action="/admin">
-                        <input type="hidden" name="userId" value="${people.id}"/>
+                        <input type="hidden" name="userId" value="${person.id}"/>
                         <input type="hidden" name="action" value="delete"/>
                         <button type="submit">Delete</button>
                     </form>
@@ -37,7 +40,7 @@
                 </td>
 
             </tr>
-        </c:forEach>
+
     </table>
     <a href="/">Главная</a>
 </div>

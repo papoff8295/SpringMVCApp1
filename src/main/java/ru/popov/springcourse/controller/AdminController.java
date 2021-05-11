@@ -1,17 +1,14 @@
 package ru.popov.springcourse.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.popov.springcourse.dao.PersonDAO;
-import ru.popov.springcourse.dto.PersonDTO;
 import ru.popov.springcourse.models.Person;
 
 @Controller
-@RequestMapping(value = "/admin/")
+@RequestMapping("/admin")
 public class AdminController {
     private final PersonDAO personDAO;
 
@@ -26,7 +23,7 @@ public class AdminController {
         return "admin";
     }
 
-    @DeleteMapping
+    @PostMapping
     public String  deleteUser(@RequestParam(required = true, defaultValue = "" ) int userId,
                               @RequestParam(required = true, defaultValue = "" ) String action,
                               Model model) {
@@ -36,13 +33,15 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<PersonDTO> getPersonById(@PathVariable(name = "id") int id) {
+    @GetMapping("/{id}")
+    public String getPersonById(@PathVariable(name = "id") int id, Model model) {
         Person person = personDAO.show(id);
-        if (person == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        PersonDTO result = PersonDTO.fromPerson(person);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        if (person == null) {
+            model.addAttribute("error", "Нет такого");
+            return "admin";
+        }
+        model.addAttribute("person", person);
+        return "show";
 
     }
 }

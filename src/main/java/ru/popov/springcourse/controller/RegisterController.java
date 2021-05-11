@@ -39,19 +39,14 @@ public class RegisterController {
     public String register(@ModelAttribute("userForm") @Valid RegisterPersonDTO registerPersonDTO,
                            BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) return "registration";
-        Person person = new Person();
-        person.setName(registerPersonDTO.getName());
-        person.setPassword(registerPersonDTO.getPassword());
-        person.setEmail(registerPersonDTO.getEmail());
-        person.setAge(registerPersonDTO.getAge());
+        Person person = registerPersonDTO.toPerson();
         //PersonDTO result = PersonDTO.fromPerson(registerPerson);
         if (!personDAO.register(person)) {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }
-
-
-        return "redirect:/";
+        model.addAttribute("userRegister", "Регистрация прошла успешно");
+        return "index";
     }
 
 }

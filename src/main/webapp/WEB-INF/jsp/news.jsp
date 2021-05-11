@@ -4,8 +4,8 @@
 
 <!DOCTYPE html>
 <html>
+<jsp:include page="fragment/head.jsp"/>
 <head>
-    <meta charset="utf-8">
     <title>Новости</title>
 </head>
 <body>

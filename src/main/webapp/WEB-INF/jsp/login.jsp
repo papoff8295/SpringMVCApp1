@@ -1,11 +1,10 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
 <html>
+<jsp:include page="fragment/head.jsp"/>
 <head>
-    <meta charset="utf-8">
     <title>Log in with your account</title>
 </head>
 
